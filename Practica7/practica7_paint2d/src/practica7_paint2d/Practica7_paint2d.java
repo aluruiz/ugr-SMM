@@ -11,7 +11,7 @@ package practica7_paint2d;
  */
 public class Practica7_paint2d {
 
-    /**
+        /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
