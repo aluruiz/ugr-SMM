@@ -5,6 +5,9 @@
  */
 package practica7_paint2d;
 
+import java.awt.BasicStroke;
+import java.awt.Stroke;
+
 /**
  *
  * @author Shiri
@@ -29,37 +32,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         colores = new javax.swing.ButtonGroup();
         formas = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
+        barraAtributos = new javax.swing.JPanel();
+        etiqueta = new javax.swing.JLabel();
+        atributos = new javax.swing.JPanel();
+        panelColores = new javax.swing.JPanel();
+        tablaColores = new javax.swing.JPanel();
+        colores1 = new javax.swing.JPanel();
         negro = new javax.swing.JToggleButton();
         rojo = new javax.swing.JToggleButton();
         azul = new javax.swing.JToggleButton();
-        jPanel8 = new javax.swing.JPanel();
+        colores2 = new javax.swing.JPanel();
         blanco = new javax.swing.JToggleButton();
         amarillo = new javax.swing.JToggleButton();
         verde = new javax.swing.JToggleButton();
         color_texto = new java.awt.Label();
-        jPanel4 = new javax.swing.JPanel();
-        grosor = new java.awt.Label();
-        jPanel9 = new javax.swing.JPanel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
+        panelGrosor = new javax.swing.JPanel();
+        grosor_texto = new java.awt.Label();
+        grosor = new javax.swing.JPanel();
+        tamGrosor = new javax.swing.JSpinner();
+        panelAtributos = new javax.swing.JPanel();
+        atributos1 = new javax.swing.JPanel();
         relleno = new javax.swing.JCheckBox();
         alisar = new javax.swing.JCheckBox();
-        jPanel11 = new javax.swing.JPanel();
+        atributos2 = new javax.swing.JPanel();
         transparencia = new javax.swing.JCheckBox();
         editar = new javax.swing.JCheckBox();
-        jToolBar1 = new javax.swing.JToolBar();
+        barraHerramientas = new javax.swing.JToolBar();
         punto = new javax.swing.JToggleButton();
         linea = new javax.swing.JToggleButton();
         rectangulo = new javax.swing.JToggleButton();
         elipse = new javax.swing.JToggleButton();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Nuevo = new javax.swing.JMenuItem();
@@ -72,147 +75,178 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        barraAtributos.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, java.awt.BorderLayout.PAGE_END);
+        etiqueta.setText("jLabel1");
+        barraAtributos.add(etiqueta, java.awt.BorderLayout.PAGE_END);
 
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        atributos.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jPanel3.setLayout(new java.awt.BorderLayout());
+        panelColores.setLayout(new java.awt.BorderLayout());
 
-        jPanel6.setLayout(new java.awt.BorderLayout());
+        tablaColores.setLayout(new java.awt.BorderLayout());
 
         negro.setBackground(java.awt.Color.black);
         colores.add(negro);
         negro.setPreferredSize(new java.awt.Dimension(20, 20));
-        jPanel7.add(negro);
+        colores1.add(negro);
 
         rojo.setBackground(java.awt.Color.red);
         colores.add(rojo);
         rojo.setPreferredSize(new java.awt.Dimension(20, 20));
-        jPanel7.add(rojo);
+        colores1.add(rojo);
 
         azul.setBackground(java.awt.Color.blue);
         colores.add(azul);
         azul.setPreferredSize(new java.awt.Dimension(20, 20));
-        jPanel7.add(azul);
+        colores1.add(azul);
 
-        jPanel6.add(jPanel7, java.awt.BorderLayout.PAGE_START);
+        tablaColores.add(colores1, java.awt.BorderLayout.PAGE_START);
 
         blanco.setBackground(java.awt.Color.white);
         colores.add(blanco);
         blanco.setPreferredSize(new java.awt.Dimension(20, 20));
-        jPanel8.add(blanco);
+        colores2.add(blanco);
 
         amarillo.setBackground(java.awt.Color.yellow);
         colores.add(amarillo);
         amarillo.setPreferredSize(new java.awt.Dimension(20, 20));
-        jPanel8.add(amarillo);
+        colores2.add(amarillo);
 
         verde.setBackground(java.awt.Color.green);
         colores.add(verde);
         verde.setPreferredSize(new java.awt.Dimension(20, 20));
-        jPanel8.add(verde);
+        colores2.add(verde);
 
-        jPanel6.add(jPanel8, java.awt.BorderLayout.PAGE_END);
+        tablaColores.add(colores2, java.awt.BorderLayout.PAGE_END);
 
-        jPanel3.add(jPanel6, java.awt.BorderLayout.PAGE_END);
+        panelColores.add(tablaColores, java.awt.BorderLayout.PAGE_END);
 
         color_texto.setText("Color");
-        jPanel3.add(color_texto, java.awt.BorderLayout.PAGE_START);
+        panelColores.add(color_texto, java.awt.BorderLayout.PAGE_START);
 
-        jPanel2.add(jPanel3);
+        atributos.add(panelColores);
 
-        jPanel4.setLayout(new java.awt.BorderLayout());
+        panelGrosor.setLayout(new java.awt.BorderLayout());
 
-        grosor.setText("Grosor");
-        jPanel4.add(grosor, java.awt.BorderLayout.PAGE_START);
+        grosor_texto.setText("Grosor");
+        panelGrosor.add(grosor_texto, java.awt.BorderLayout.PAGE_START);
 
-        jSpinner1.setPreferredSize(new java.awt.Dimension(39, 30));
-        jPanel9.add(jSpinner1);
+        tamGrosor.setPreferredSize(new java.awt.Dimension(39, 30));
+        tamGrosor.setValue(1);
+        tamGrosor.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tamGrosorStateChanged(evt);
+            }
+        });
+        grosor.add(tamGrosor);
 
-        jPanel4.add(jPanel9, java.awt.BorderLayout.CENTER);
+        panelGrosor.add(grosor, java.awt.BorderLayout.CENTER);
 
-        jPanel2.add(jPanel4);
+        atributos.add(panelGrosor);
 
-        jPanel5.setLayout(new java.awt.BorderLayout());
+        panelAtributos.setLayout(new java.awt.BorderLayout());
 
-        jPanel10.setLayout(new java.awt.BorderLayout());
+        atributos1.setLayout(new java.awt.BorderLayout());
 
         relleno.setText("Relleno");
-        jPanel10.add(relleno, java.awt.BorderLayout.PAGE_START);
+        atributos1.add(relleno, java.awt.BorderLayout.PAGE_START);
 
         alisar.setText("Alisar");
-        jPanel10.add(alisar, java.awt.BorderLayout.PAGE_END);
+        atributos1.add(alisar, java.awt.BorderLayout.PAGE_END);
 
-        jPanel5.add(jPanel10, java.awt.BorderLayout.LINE_START);
+        panelAtributos.add(atributos1, java.awt.BorderLayout.LINE_START);
 
-        jPanel11.setLayout(new java.awt.BorderLayout());
+        atributos2.setLayout(new java.awt.BorderLayout());
 
         transparencia.setText("Transparencia");
-        jPanel11.add(transparencia, java.awt.BorderLayout.PAGE_START);
+        atributos2.add(transparencia, java.awt.BorderLayout.PAGE_START);
 
         editar.setText("Editar");
-        jPanel11.add(editar, java.awt.BorderLayout.PAGE_END);
+        atributos2.add(editar, java.awt.BorderLayout.PAGE_END);
 
-        jPanel5.add(jPanel11, java.awt.BorderLayout.LINE_END);
+        panelAtributos.add(atributos2, java.awt.BorderLayout.LINE_END);
 
-        jPanel2.add(jPanel5);
+        atributos.add(panelAtributos);
 
-        jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
+        barraAtributos.add(atributos, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(barraAtributos, java.awt.BorderLayout.PAGE_END);
 
-        jToolBar1.setRollover(true);
+        barraHerramientas.setRollover(true);
 
         formas.add(punto);
         punto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practica7_paint2d/iconos/punto.png"))); // NOI18N
         punto.setFocusable(false);
         punto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         punto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(punto);
+        punto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                puntoActionPerformed(evt);
+            }
+        });
+        barraHerramientas.add(punto);
 
         formas.add(linea);
         linea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practica7_paint2d/iconos/linea.png"))); // NOI18N
         linea.setFocusable(false);
         linea.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         linea.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(linea);
+        linea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lineaActionPerformed(evt);
+            }
+        });
+        barraHerramientas.add(linea);
 
         formas.add(rectangulo);
         rectangulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practica7_paint2d/iconos/rectangulo.png"))); // NOI18N
         rectangulo.setFocusable(false);
         rectangulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         rectangulo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(rectangulo);
+        rectangulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rectanguloActionPerformed(evt);
+            }
+        });
+        barraHerramientas.add(rectangulo);
 
         formas.add(elipse);
         elipse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practica7_paint2d/iconos/elipse.png"))); // NOI18N
         elipse.setFocusable(false);
         elipse.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         elipse.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(elipse);
+        elipse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                elipseActionPerformed(evt);
+            }
+        });
+        barraHerramientas.add(elipse);
 
-        getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(barraHerramientas, java.awt.BorderLayout.PAGE_START);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 142, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(escritorio, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");
 
         Nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practica7_paint2d/iconos/nuevo.png"))); // NOI18N
         Nuevo.setText("Nuevo");
+        Nuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NuevoActionPerformed(evt);
+            }
+        });
         jMenu1.add(Nuevo);
 
         Abrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practica7_paint2d/iconos/abrir.png"))); // NOI18N
@@ -246,44 +280,79 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoActionPerformed
+        VentanaInterna vi = new VentanaInterna();
+        escritorio.add(vi);
+        vi.setVisible(true);
+    }//GEN-LAST:event_NuevoActionPerformed
+
+    private void lineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineaActionPerformed
+        VentanaInterna vi;
+        vi = (VentanaInterna)escritorio.getSelectedFrame();
+        vi.getLienzo().setForma(Herramientas.linea);
+    }//GEN-LAST:event_lineaActionPerformed
+
+    private void rectanguloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rectanguloActionPerformed
+        VentanaInterna vi;
+        vi = (VentanaInterna)escritorio.getSelectedFrame();
+        vi.getLienzo().setForma(Herramientas.rectangulo);
+    }//GEN-LAST:event_rectanguloActionPerformed
+
+    private void elipseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elipseActionPerformed
+        VentanaInterna vi;
+        vi = (VentanaInterna)escritorio.getSelectedFrame();
+        vi.getLienzo().setForma(Herramientas.elipse);
+    }//GEN-LAST:event_elipseActionPerformed
+
+    private void puntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_puntoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_puntoActionPerformed
+
+    private void tamGrosorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tamGrosorStateChanged
+        VentanaInterna vi;
+        vi = (VentanaInterna)escritorio.getSelectedFrame();
+        Stroke nuevo = new BasicStroke((int)tamGrosor.getValue()); 
+        vi.getLienzo().setStroke(nuevo); 
+    }//GEN-LAST:event_tamGrosorStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Abrir;
     private javax.swing.JMenuItem Guardar;
     private javax.swing.JMenuItem Nuevo;
     private javax.swing.JCheckBox alisar;
     private javax.swing.JToggleButton amarillo;
+    private javax.swing.JPanel atributos;
+    private javax.swing.JPanel atributos1;
+    private javax.swing.JPanel atributos2;
     private javax.swing.JToggleButton azul;
+    private javax.swing.JPanel barraAtributos;
+    private javax.swing.JToolBar barraHerramientas;
     private javax.swing.JToggleButton blanco;
     private java.awt.Label color_texto;
     private javax.swing.ButtonGroup colores;
+    private javax.swing.JPanel colores1;
+    private javax.swing.JPanel colores2;
     private javax.swing.JCheckBox editar;
     private javax.swing.JToggleButton elipse;
+    private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JLabel etiqueta;
     private javax.swing.ButtonGroup formas;
-    private java.awt.Label grosor;
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel grosor;
+    private java.awt.Label grosor_texto;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToggleButton linea;
     private javax.swing.JToggleButton negro;
+    private javax.swing.JPanel panelAtributos;
+    private javax.swing.JPanel panelColores;
+    private javax.swing.JPanel panelGrosor;
     private javax.swing.JToggleButton punto;
     private javax.swing.JToggleButton rectangulo;
     private javax.swing.JCheckBox relleno;
     private javax.swing.JToggleButton rojo;
+    private javax.swing.JPanel tablaColores;
+    private javax.swing.JSpinner tamGrosor;
     private javax.swing.JCheckBox transparencia;
     private javax.swing.JCheckBoxMenuItem verBarraAtributos;
     private javax.swing.JCheckBoxMenuItem verBarraEstado;

@@ -1,0 +1,261 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package practica7_paint2d;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.util.List;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.Stroke;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Shiri
+ */
+public class Lienzo2D extends javax.swing.JPanel {
+    private Color color = new Color(0,0,0);
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public Stroke getStroke() {
+        return stroke;
+    }
+
+    public void setStroke(Stroke stroke) {
+        this.stroke = stroke;
+    }
+
+    public boolean isRelleno() {
+        return relleno;
+    }
+
+    public void setRelleno(boolean relleno) {
+        this.relleno = relleno;
+    }
+
+    public Herramientas getForma() {
+        return forma;
+    }
+
+    public void setForma(Herramientas forma) {
+        this.forma = forma;
+    }
+    private Stroke stroke = new BasicStroke(1);
+    private List<Shape> vShape = new ArrayList();
+    private Shape sAux; 
+    //Checkbox
+    private boolean relleno;
+    private boolean editar; 
+    private boolean transparencia; 
+    private boolean alisar;
+
+    public boolean isEditar() {
+        return editar;
+    }
+
+    public void setEditar(boolean editar) {
+        this.editar = editar;
+    }
+
+    public boolean isTransparencia() {
+        return transparencia;
+    }
+
+    public void setTransparencia(boolean transparencia) {
+        this.transparencia = transparencia;
+    }
+
+    public boolean isAlisar() {
+        return alisar;
+    }
+
+    public void setAlisar(boolean alisar) {
+        this.alisar = alisar;
+    }
+    //Forma
+    private Herramientas forma = Herramientas.rectangulo; 
+    //Puntos de posicion
+    private Point posicion;;
+    private Point posicion2;
+    
+    /**
+     * Creates new form Lienzo
+     */
+    public Lienzo2D() {
+        initComponents();
+    }
+    
+    public void paint(Graphics g){
+        super.paint(g);
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setPaint(color);
+        g2d.setStroke(stroke);
+        
+        //Cambiar las propiedades
+        for(Shape s:vShape) {
+            if(relleno) g2d.fill(s);
+            g2d.draw(s);
+        }
+    }
+    
+    public Shape createShape() {
+        Shape shape = null; 
+        
+        //Formas 2D
+        switch (forma){
+            case punto:
+                
+                break; 
+            case linea:
+                  Line2D linea = new Line2D.Double(); 
+                  shape = linea;
+                break;
+            case rectangulo:
+                Rectangle rectangulo = new Rectangle(posicion);
+                shape = rectangulo; 
+                break; 
+            case elipse:
+                Ellipse2D elipse = new Ellipse2D.Double();
+                shape = elipse; 
+                break; 
+        }
+        
+        return shape; 
+    }
+    
+    public void updateShape(Shape shape, Point p) {
+            int x, y;
+            int ancho, alto;
+
+            if (posicion.x > p.x){
+                x = p.x;
+                ancho = posicion.x - p.x; 
+            }else{
+                x = posicion.x;
+                ancho = p.x - posicion.x;
+            }
+
+            if (posicion.y > p.y){
+                y = p.y;
+                alto = posicion.y - p.y; 
+            }else{
+                y = posicion.y;
+                alto = p.y - posicion.y;
+            }
+
+        switch (forma){
+            case punto:
+                
+                break; 
+            case linea:
+                Line2D Laux = (Line2D) shape; 
+                Laux.setLine(posicion.x, posicion.y, p.x, p.y);
+                shape = Laux; 
+                break;
+            case rectangulo:
+                Rectangle Raux = (Rectangle) shape;
+                Raux.setFrameFromDiagonal(posicion, p); 
+                shape = Raux;
+                break; 
+            case elipse:
+                Ellipse2D Eaux = (Ellipse2D) shape;
+                Eaux.setFrame(x, y, ancho, alto);
+                break;
+        }
+    }
+    
+    private Shape getSelectedShape(Point2D p){
+        for(Shape s:vShape)
+        if(s.contains(p)) return s;
+        return null;
+    }
+    
+    /*public void setLocation(Point2D pos){
+        double dx=pos.getX()-this.getX1();
+        double dy=pos.getY()-this.getY1();
+        Point2D newp2 = new Point2D.Double(this.getX2()+dx,this.getY2()+dy);
+        this.setLine(pos,newp2);
+    }*/
+
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        setBackground(java.awt.Color.white);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        posicion = evt.getPoint();
+        if (isEditar()){
+            sAux= this.getSelectedShape(posicion);
+        }
+        sAux = createShape();
+        vShape.add(sAux); 
+    }//GEN-LAST:event_formMousePressed
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        if (isEditar()){
+            
+        }
+        else {
+            posicion2 = evt.getPoint();
+            updateShape(vShape.get(vShape.size()-1), posicion2);
+            repaint(); 
+        } 
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        this.formMouseDragged(evt);
+    }//GEN-LAST:event_formMouseReleased
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // End of variables declaration//GEN-END:variables
+}
