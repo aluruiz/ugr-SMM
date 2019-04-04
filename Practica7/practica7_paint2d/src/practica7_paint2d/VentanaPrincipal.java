@@ -6,7 +6,10 @@
 package practica7_paint2d;
 
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Stroke;
+import java.io.File;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -19,6 +22,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
+    }
+    
+    public VentanaInterna seleccionVentana(){
+        VentanaInterna vi;
+        vi = (VentanaInterna)escritorio.getSelectedFrame();
+        return vi; 
     }
 
     /**
@@ -64,11 +73,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         elipse = new javax.swing.JToggleButton();
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        Archivo = new javax.swing.JMenu();
         Nuevo = new javax.swing.JMenuItem();
         Abrir = new javax.swing.JMenuItem();
         Guardar = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        Edicion = new javax.swing.JMenu();
         verBarraEstado = new javax.swing.JCheckBoxMenuItem();
         verBarraFormas = new javax.swing.JCheckBoxMenuItem();
         verBarraAtributos = new javax.swing.JCheckBoxMenuItem();
@@ -77,7 +86,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         barraAtributos.setLayout(new java.awt.BorderLayout());
 
-        etiqueta.setText("jLabel1");
+        etiqueta.setText("Elige una herramienta.");
         barraAtributos.add(etiqueta, java.awt.BorderLayout.PAGE_END);
 
         atributos.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
@@ -89,16 +98,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         negro.setBackground(java.awt.Color.black);
         colores.add(negro);
         negro.setPreferredSize(new java.awt.Dimension(20, 20));
+        negro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                negroActionPerformed(evt);
+            }
+        });
         colores1.add(negro);
 
         rojo.setBackground(java.awt.Color.red);
         colores.add(rojo);
         rojo.setPreferredSize(new java.awt.Dimension(20, 20));
+        rojo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rojoActionPerformed(evt);
+            }
+        });
         colores1.add(rojo);
 
         azul.setBackground(java.awt.Color.blue);
         colores.add(azul);
         azul.setPreferredSize(new java.awt.Dimension(20, 20));
+        azul.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                azulActionPerformed(evt);
+            }
+        });
         colores1.add(azul);
 
         tablaColores.add(colores1, java.awt.BorderLayout.PAGE_START);
@@ -106,16 +130,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         blanco.setBackground(java.awt.Color.white);
         colores.add(blanco);
         blanco.setPreferredSize(new java.awt.Dimension(20, 20));
+        blanco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                blancoActionPerformed(evt);
+            }
+        });
         colores2.add(blanco);
 
         amarillo.setBackground(java.awt.Color.yellow);
         colores.add(amarillo);
         amarillo.setPreferredSize(new java.awt.Dimension(20, 20));
+        amarillo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                amarilloActionPerformed(evt);
+            }
+        });
         colores2.add(amarillo);
 
         verde.setBackground(java.awt.Color.green);
         colores.add(verde);
         verde.setPreferredSize(new java.awt.Dimension(20, 20));
+        verde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verdeActionPerformed(evt);
+            }
+        });
         colores2.add(verde);
 
         tablaColores.add(colores2, java.awt.BorderLayout.PAGE_END);
@@ -150,9 +189,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         atributos1.setLayout(new java.awt.BorderLayout());
 
         relleno.setText("Relleno");
+        relleno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rellenoActionPerformed(evt);
+            }
+        });
         atributos1.add(relleno, java.awt.BorderLayout.PAGE_START);
 
         alisar.setText("Alisar");
+        alisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alisarActionPerformed(evt);
+            }
+        });
         atributos1.add(alisar, java.awt.BorderLayout.PAGE_END);
 
         panelAtributos.add(atributos1, java.awt.BorderLayout.LINE_START);
@@ -160,9 +209,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         atributos2.setLayout(new java.awt.BorderLayout());
 
         transparencia.setText("Transparencia");
+        transparencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transparenciaActionPerformed(evt);
+            }
+        });
         atributos2.add(transparencia, java.awt.BorderLayout.PAGE_START);
 
         editar.setText("Editar");
+        editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarActionPerformed(evt);
+            }
+        });
         atributos2.add(editar, java.awt.BorderLayout.PAGE_END);
 
         panelAtributos.add(atributos2, java.awt.BorderLayout.LINE_END);
@@ -238,7 +297,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         getContentPane().add(escritorio, java.awt.BorderLayout.CENTER);
 
-        jMenu1.setText("File");
+        Archivo.setText("Archivo");
 
         Nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practica7_paint2d/iconos/nuevo.png"))); // NOI18N
         Nuevo.setText("Nuevo");
@@ -247,33 +306,58 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 NuevoActionPerformed(evt);
             }
         });
-        jMenu1.add(Nuevo);
+        Archivo.add(Nuevo);
 
         Abrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practica7_paint2d/iconos/abrir.png"))); // NOI18N
         Abrir.setText("Abrir");
-        jMenu1.add(Abrir);
+        Abrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AbrirActionPerformed(evt);
+            }
+        });
+        Archivo.add(Abrir);
 
         Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practica7_paint2d/iconos/guardar.png"))); // NOI18N
         Guardar.setText("Guardar");
-        jMenu1.add(Guardar);
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
+        Archivo.add(Guardar);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(Archivo);
 
-        jMenu2.setText("Edit");
+        Edicion.setText("Edicion");
 
         verBarraEstado.setSelected(true);
         verBarraEstado.setText("Ver barra de estado");
-        jMenu2.add(verBarraEstado);
+        verBarraEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verBarraEstadoActionPerformed(evt);
+            }
+        });
+        Edicion.add(verBarraEstado);
 
         verBarraFormas.setSelected(true);
         verBarraFormas.setText("Ver barra de formas");
-        jMenu2.add(verBarraFormas);
+        verBarraFormas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verBarraFormasActionPerformed(evt);
+            }
+        });
+        Edicion.add(verBarraFormas);
 
         verBarraAtributos.setSelected(true);
         verBarraAtributos.setText("Ver barra de atributos");
-        jMenu2.add(verBarraAtributos);
+        verBarraAtributos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verBarraAtributosActionPerformed(evt);
+            }
+        });
+        Edicion.add(verBarraAtributos);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(Edicion);
 
         setJMenuBar(jMenuBar1);
 
@@ -281,42 +365,146 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoActionPerformed
-        VentanaInterna vi = new VentanaInterna();
-        escritorio.add(vi);
-        vi.setVisible(true);
+       VentanaInterna vi = new VentanaInterna();
+       escritorio.add(vi);
+       vi.setVisible(true);
+       punto.doClick();
     }//GEN-LAST:event_NuevoActionPerformed
 
     private void lineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lineaActionPerformed
-        VentanaInterna vi;
-        vi = (VentanaInterna)escritorio.getSelectedFrame();
-        vi.getLienzo().setForma(Herramientas.linea);
+        seleccionVentana().getLienzo().setForma(Herramientas.linea);
+        etiqueta.setText("Linea.");
     }//GEN-LAST:event_lineaActionPerformed
 
     private void rectanguloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rectanguloActionPerformed
-        VentanaInterna vi;
-        vi = (VentanaInterna)escritorio.getSelectedFrame();
-        vi.getLienzo().setForma(Herramientas.rectangulo);
+        seleccionVentana().getLienzo().setForma(Herramientas.rectangulo);
+        etiqueta.setText("Rectangulo.");
     }//GEN-LAST:event_rectanguloActionPerformed
 
     private void elipseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elipseActionPerformed
-        VentanaInterna vi;
-        vi = (VentanaInterna)escritorio.getSelectedFrame();
-        vi.getLienzo().setForma(Herramientas.elipse);
+        seleccionVentana().getLienzo().setForma(Herramientas.elipse);
+        etiqueta.setText("Elipse.");
     }//GEN-LAST:event_elipseActionPerformed
 
     private void puntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_puntoActionPerformed
-        // TODO add your handling code here:
+       seleccionVentana().getLienzo().setForma(Herramientas.punto);
+       etiqueta.setText("Punto.");
     }//GEN-LAST:event_puntoActionPerformed
 
     private void tamGrosorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tamGrosorStateChanged
-        VentanaInterna vi;
-        vi = (VentanaInterna)escritorio.getSelectedFrame();
         Stroke nuevo = new BasicStroke((int)tamGrosor.getValue()); 
-        vi.getLienzo().setStroke(nuevo); 
+        seleccionVentana().getLienzo().setStroke(nuevo); 
     }//GEN-LAST:event_tamGrosorStateChanged
+
+    private void rellenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rellenoActionPerformed
+        if (relleno.isSelected()){
+            seleccionVentana().getLienzo().setRelleno(true);
+        }
+        else{
+            seleccionVentana().getLienzo().setRelleno(false);
+        }
+    }//GEN-LAST:event_rellenoActionPerformed
+
+    private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
+        if (editar.isSelected()){
+            seleccionVentana().getLienzo().setEditar(true);
+        }
+        else{
+            seleccionVentana().getLienzo().setEditar(false);
+        }
+    }//GEN-LAST:event_editarActionPerformed
+
+    private void negroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_negroActionPerformed
+        seleccionVentana().getLienzo().setColor(Color.black);
+    }//GEN-LAST:event_negroActionPerformed
+
+    private void rojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rojoActionPerformed
+        seleccionVentana().getLienzo().setColor(Color.red);
+    }//GEN-LAST:event_rojoActionPerformed
+
+    private void azulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_azulActionPerformed
+        seleccionVentana().getLienzo().setColor(Color.blue);
+    }//GEN-LAST:event_azulActionPerformed
+
+    private void blancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blancoActionPerformed
+        seleccionVentana().getLienzo().setColor(Color.white);
+    }//GEN-LAST:event_blancoActionPerformed
+
+    private void amarilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amarilloActionPerformed
+        seleccionVentana().getLienzo().setColor(Color.yellow);
+    }//GEN-LAST:event_amarilloActionPerformed
+
+    private void verdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verdeActionPerformed
+        seleccionVentana().getLienzo().setColor(Color.green);
+    }//GEN-LAST:event_verdeActionPerformed
+
+    private void AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirActionPerformed
+        JFileChooser dlg = new JFileChooser();
+        int resp = dlg.showOpenDialog(this);
+        if( resp == JFileChooser.APPROVE_OPTION) {
+            File f = dlg.getSelectedFile();
+            //Código
+        }
+    }//GEN-LAST:event_AbrirActionPerformed
+
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        JFileChooser dlg = new JFileChooser();
+        int resp = dlg.showSaveDialog(this);
+        if( resp == JFileChooser.APPROVE_OPTION) {
+            File f = dlg.getSelectedFile();
+            //Código
+        }
+    }//GEN-LAST:event_GuardarActionPerformed
+
+    private void transparenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transparenciaActionPerformed
+        if (transparencia.isSelected()){
+            seleccionVentana().getLienzo().setTransparencia(true);
+        }
+        else{
+            seleccionVentana().getLienzo().setTransparencia(false);
+        }
+    }//GEN-LAST:event_transparenciaActionPerformed
+
+    private void alisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alisarActionPerformed
+        if (alisar.isSelected()){
+            seleccionVentana().getLienzo().setAlisar(true);
+        }
+        else{
+            seleccionVentana().getLienzo().setAlisar(false);
+        }
+    }//GEN-LAST:event_alisarActionPerformed
+
+    private void verBarraEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verBarraEstadoActionPerformed
+        if(verBarraEstado.isSelected()){
+            this.etiqueta.setVisible(true);
+        }
+        else{
+            this.etiqueta.setVisible(false);
+        }
+    }//GEN-LAST:event_verBarraEstadoActionPerformed
+
+    private void verBarraFormasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verBarraFormasActionPerformed
+        if(verBarraFormas.isSelected()){
+            this.barraHerramientas.setVisible(true);
+        }
+        else{
+            this.barraHerramientas.setVisible(false);
+        }
+    }//GEN-LAST:event_verBarraFormasActionPerformed
+
+    private void verBarraAtributosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verBarraAtributosActionPerformed
+        if(verBarraAtributos.isSelected()){
+            this.atributos.setVisible(true);
+        }
+        else{
+            this.atributos.setVisible(false);
+        }
+    }//GEN-LAST:event_verBarraAtributosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Abrir;
+    private javax.swing.JMenu Archivo;
+    private javax.swing.JMenu Edicion;
     private javax.swing.JMenuItem Guardar;
     private javax.swing.JMenuItem Nuevo;
     private javax.swing.JCheckBox alisar;
@@ -339,8 +527,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.ButtonGroup formas;
     private javax.swing.JPanel grosor;
     private java.awt.Label grosor_texto;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JToggleButton linea;
     private javax.swing.JToggleButton negro;

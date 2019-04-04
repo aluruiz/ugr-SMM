@@ -5,17 +5,20 @@
  */
 package practica7_paint2d;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.List;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
@@ -24,7 +27,12 @@ import java.util.ArrayList;
  * @author Shiri
  */
 public class Lienzo2D extends javax.swing.JPanel {
+    //Propiedades Iniciales
     private Color color = new Color(0,0,0);
+    private Stroke stroke = new BasicStroke(1);
+    private Herramientas forma = Herramientas.punto; 
+    Composite comp;
+    RenderingHints render;
 
     public Color getColor() {
         return color;
@@ -32,6 +40,7 @@ public class Lienzo2D extends javax.swing.JPanel {
 
     public void setColor(Color color) {
         this.color = color;
+        repaint();
     }
 
     public Stroke getStroke() {
@@ -40,14 +49,7 @@ public class Lienzo2D extends javax.swing.JPanel {
 
     public void setStroke(Stroke stroke) {
         this.stroke = stroke;
-    }
-
-    public boolean isRelleno() {
-        return relleno;
-    }
-
-    public void setRelleno(boolean relleno) {
-        this.relleno = relleno;
+        repaint();
     }
 
     public Herramientas getForma() {
@@ -56,15 +58,27 @@ public class Lienzo2D extends javax.swing.JPanel {
 
     public void setForma(Herramientas forma) {
         this.forma = forma;
+        repaint();
     }
-    private Stroke stroke = new BasicStroke(1);
+    
+    //Vector y Forma Auxiliar
     private List<Shape> vShape = new ArrayList();
     private Shape sAux; 
+    
     //Checkbox
     private boolean relleno;
     private boolean editar; 
     private boolean transparencia; 
     private boolean alisar;
+    
+    public boolean isRelleno() {
+        return relleno;
+    }
+
+    public void setRelleno(boolean relleno) {
+        this.relleno = relleno;
+        repaint();
+    }
 
     public boolean isEditar() {
         return editar;
@@ -72,6 +86,7 @@ public class Lienzo2D extends javax.swing.JPanel {
 
     public void setEditar(boolean editar) {
         this.editar = editar;
+        repaint();
     }
 
     public boolean isTransparencia() {
@@ -80,6 +95,7 @@ public class Lienzo2D extends javax.swing.JPanel {
 
     public void setTransparencia(boolean transparencia) {
         this.transparencia = transparencia;
+        repaint();
     }
 
     public boolean isAlisar() {
@@ -88,11 +104,11 @@ public class Lienzo2D extends javax.swing.JPanel {
 
     public void setAlisar(boolean alisar) {
         this.alisar = alisar;
+        repaint();
     }
-    //Forma
-    private Herramientas forma = Herramientas.rectangulo; 
+
     //Puntos de posicion
-    private Point posicion;;
+    private Point posicion;
     private Point posicion2;
     
     /**
@@ -105,8 +121,31 @@ public class Lienzo2D extends javax.swing.JPanel {
     public void paint(Graphics g){
         super.paint(g);
         Graphics2D g2d = (Graphics2D)g;
+        //Color
         g2d.setPaint(color);
+        
+        //Grosor
         g2d.setStroke(stroke);
+        
+        //Transparencia
+        if(transparencia){
+            comp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+            g2d.setComposite(comp);
+        }
+        else{
+            comp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f);
+            g2d.setComposite(comp);
+        }
+        
+        //Alisar
+        if(alisar){
+            render = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setRenderingHints(render);
+        }
+        else{
+            render = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
+            g2d.setRenderingHints(render);
+        }
         
         //Cambiar las propiedades
         for(Shape s:vShape) {
@@ -121,10 +160,12 @@ public class Lienzo2D extends javax.swing.JPanel {
         //Formas 2D
         switch (forma){
             case punto:
-                
-                break; 
+                GeneralPath punto = new GeneralPath();
+                punto.moveTo(posicion.x, posicion.y);
+                shape = punto; 
+                break;
             case linea:
-                  Line2D linea = new Line2D.Double(); 
+                  Line linea = new Line(); 
                   shape = linea;
                 break;
             case rectangulo:
@@ -132,7 +173,7 @@ public class Lienzo2D extends javax.swing.JPanel {
                 shape = rectangulo; 
                 break; 
             case elipse:
-                Ellipse2D elipse = new Ellipse2D.Double();
+                Elipse elipse = new Elipse();
                 shape = elipse; 
                 break; 
         }
@@ -161,22 +202,21 @@ public class Lienzo2D extends javax.swing.JPanel {
             }
 
         switch (forma){
-            case punto:
-                
-                break; 
+            case punto: 
+                ArrayList<Integer> xPoint = new ArrayList();
+                ArrayList<Integer> yPoint = new ArrayList(); 
+                xPoint.add(p.x);
+                yPoint.add(p.y);
+                ((GeneralPath) shape).lineTo(xPoint.get(xPoint.size()-1), yPoint.get(yPoint.size()-1));
+                break;
             case linea:
-                Line2D Laux = (Line2D) shape; 
-                Laux.setLine(posicion.x, posicion.y, p.x, p.y);
-                shape = Laux; 
+                ((Line) shape).setLine(posicion.x, posicion.y, p.x, p.y); 
                 break;
             case rectangulo:
-                Rectangle Raux = (Rectangle) shape;
-                Raux.setFrameFromDiagonal(posicion, p); 
-                shape = Raux;
+                ((Rectangle) shape).setFrameFromDiagonal(posicion, p); 
                 break; 
             case elipse:
-                Ellipse2D Eaux = (Ellipse2D) shape;
-                Eaux.setFrame(x, y, ancho, alto);
+                ((Elipse) shape).setFrame(x, y, ancho, alto);
                 break;
         }
     }
@@ -187,13 +227,17 @@ public class Lienzo2D extends javax.swing.JPanel {
         return null;
     }
     
-    /*public void setLocation(Point2D pos){
-        double dx=pos.getX()-this.getX1();
-        double dy=pos.getY()-this.getY1();
-        Point2D newp2 = new Point2D.Double(this.getX2()+dx,this.getY2()+dy);
-        this.setLine(pos,newp2);
-    }*/
-
+    public void setLocation(Shape s, Point p){
+        if(s instanceof Rectangle){
+            ((Rectangle) s).setLocation(p);
+        }
+        else if(s instanceof Elipse){
+            ((Elipse) s).setLocation(p);
+        }
+        else if(s instanceof Line){
+            ((Line) s).setLocation(p);
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -236,25 +280,26 @@ public class Lienzo2D extends javax.swing.JPanel {
         if (isEditar()){
             sAux= this.getSelectedShape(posicion);
         }
-        sAux = createShape();
-        vShape.add(sAux); 
+        else {
+            sAux = createShape();
+            vShape.add(sAux);
+        }
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        posicion2 = evt.getPoint();
         if (isEditar()){
-            
+            setLocation(sAux, posicion2);
         }
         else {
-            posicion2 = evt.getPoint();
             updateShape(vShape.get(vShape.size()-1), posicion2);
-            repaint(); 
         } 
+        repaint();
     }//GEN-LAST:event_formMouseDragged
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         this.formMouseDragged(evt);
     }//GEN-LAST:event_formMouseReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

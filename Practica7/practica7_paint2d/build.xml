@@ -70,4 +70,15 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name="-post-jar">
+        <property name="pack.jar" value="dist/${application.title}.pack.jar"/>
+        <echo message="Packaging into a single JAR at ${pack.jar}"/>
+        <jar jarfile="${pack.jar}">
+            <zipfileset src="${dist.jar}" excludes="META-INF/*" />
+            <zipgroupfileset dir="dist/lib" includes="*.jar" excludes="META-INF/*"/>
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+            </manifest>
+        </jar>
+    </target>
 </project>
