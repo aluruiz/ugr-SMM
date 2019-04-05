@@ -27,40 +27,6 @@ public class LienzoImagen2D extends Lienzo2D{
             BufferedImage imgOut = new BufferedImage(img.getWidth(), img.getHeight(), img.getType());
             paint(imgOut.createGraphics()); 
             return imgOut; 
-            /*//Color
-            BufferedImageOp op = new RescaleOp(1.0f,0.0f,null);
-            BufferedImage image=op.filter(img,null);
-            Graphics2D g2d =(Graphics2D)image.getGraphics(); 
-            g2d.setPaint(color);
-
-            //Grosor
-            g2d.setStroke(stroke);
-
-            //Transparencia
-            if(isTransparencia()){
-                comp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
-                g2d.setComposite(comp);
-            }
-            else{
-                comp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f);
-                g2d.setComposite(comp);
-            }
-
-            //Alisar
-            if(isAlisar()){
-                render = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2d.setRenderingHints(render);
-            }
-            else{
-                render = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
-                g2d.setRenderingHints(render);
-            }
-
-            //Cambiar las propiedades
-            for(Shape s:vShape) {
-                if(isRelleno()) g2d.fill(s);
-                g2d.draw(s);
-            }*/
         }
         else
             return img;
