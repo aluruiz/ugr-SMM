@@ -5,6 +5,7 @@
  */
 package practica7_paint2d;
 
+import sm.prg.iu.Herramientas;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Stroke;

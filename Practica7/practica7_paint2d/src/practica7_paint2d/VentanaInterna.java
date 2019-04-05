@@ -5,6 +5,8 @@
  */
 package practica7_paint2d;
 
+import sm.prg.iu.Lienzo2D;
+
 /**
  *
  * @author Shiri
@@ -31,7 +33,7 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lienzo = new practica7_paint2d.Lienzo2D();
+        lienzo = new sm.prg.iu.Lienzo2D();
 
         setClosable(true);
         setIconifiable(true);
@@ -56,6 +58,6 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private practica7_paint2d.Lienzo2D lienzo;
+    private sm.prg.iu.Lienzo2D lienzo;
     // End of variables declaration//GEN-END:variables
 }

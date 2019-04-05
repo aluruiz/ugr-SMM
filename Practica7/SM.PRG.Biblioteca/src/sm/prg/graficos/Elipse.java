@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package practica7_paint2d;
+package sm.prg.graficos;
 
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;

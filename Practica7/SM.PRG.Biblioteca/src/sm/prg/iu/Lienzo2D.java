@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package practica7_paint2d;
+package sm.prg.iu;
 
+import sm.prg.graficos.Line;
+import sm.prg.graficos.Elipse;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -28,11 +30,11 @@ import java.util.ArrayList;
  */
 public class Lienzo2D extends javax.swing.JPanel {
     //Propiedades Iniciales
-    private Color color = new Color(0,0,0);
-    private Stroke stroke = new BasicStroke(1);
-    private Herramientas forma = Herramientas.punto; 
-    Composite comp;
-    RenderingHints render;
+    protected Color color = new Color(0,0,0);
+    protected Stroke stroke = new BasicStroke(1);
+    protected Herramientas forma = Herramientas.punto; 
+    protected Composite comp;
+    protected RenderingHints render;
 
     public Color getColor() {
         return color;
@@ -62,7 +64,7 @@ public class Lienzo2D extends javax.swing.JPanel {
     }
     
     //Vector y Forma Auxiliar
-    private List<Shape> vShape = new ArrayList();
+    protected List<Shape> vShape = new ArrayList();
     private Shape sAux; 
     
     //Checkbox
