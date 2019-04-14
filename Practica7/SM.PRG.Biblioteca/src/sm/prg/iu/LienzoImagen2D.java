@@ -71,6 +71,10 @@ public class LienzoImagen2D extends Lienzo2D{
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public BufferedImage getImage() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

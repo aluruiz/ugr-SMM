@@ -1,0 +1,1 @@
+practica8_LienzoImagen2D.VentanaInterna
