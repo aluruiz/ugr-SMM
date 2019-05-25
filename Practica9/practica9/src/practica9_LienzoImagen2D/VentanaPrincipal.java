@@ -10,7 +10,9 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Stroke;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 import java.awt.image.RescaleOp;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
@@ -33,6 +35,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         vi = (VentanaInterna)escritorio.getSelectedFrame();
         return vi; 
     }
+    
+    BufferedImage imgSource;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,7 +75,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         transparencia = new javax.swing.JCheckBox();
         editar = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
-        jSlider1 = new javax.swing.JSlider();
+        sliderBrillo = new javax.swing.JSlider();
         jPanel2 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         barraHerramientas = new javax.swing.JToolBar();
@@ -239,7 +243,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         atributos.add(panelAtributos);
 
-        jPanel1.add(jSlider1);
+        jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPanel1FocusLost(evt);
+            }
+        });
+
+        sliderBrillo.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderBrilloStateChanged(evt);
+            }
+        });
+        jPanel1.add(sliderBrillo);
 
         atributos.add(jPanel1);
 
@@ -308,11 +326,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 457, Short.MAX_VALUE)
+            .addGap(0, 599, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 162, Short.MAX_VALUE)
+            .addGap(0, 250, Short.MAX_VALUE)
         );
 
         getContentPane().add(escritorio, java.awt.BorderLayout.CENTER);
@@ -585,6 +603,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuRescaleOpActionPerformed
 
+    private void sliderBrilloStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderBrilloStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sliderBrilloStateChanged
+
+    private void jPanel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusGained
+        VentanaInterna vi = (VentanaInterna)(escritorio.getSelectedFrame());
+        if(vi!=null){
+            ColorModel cm = vi.getLienzo().getImage().getColorModel();
+            WritableRaster raster = vi.getLienzo().getImage().copyData(null);
+            boolean alfaPre = vi.getLienzo().getImage().isAlphaPremultiplied();
+            imgSource = new BufferedImage(cm,raster,alfaPre,null);
+            rop.filter(imgSource, vi.getLienzo().getImage());
+        }
+    }//GEN-LAST:event_jPanel1FocusGained
+
+    private void jPanel1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusLost
+        imgSource = null;
+    }//GEN-LAST:event_jPanel1FocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Abrir;
     private javax.swing.JMenu Archivo;
@@ -616,7 +653,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSlider jSlider1;
     private javax.swing.JToggleButton linea;
     private javax.swing.JMenuItem menuConvolveOp;
     private javax.swing.JMenuItem menuRescaleOp;
@@ -628,6 +664,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JToggleButton rectangulo;
     private javax.swing.JCheckBox relleno;
     private javax.swing.JToggleButton rojo;
+    private javax.swing.JSlider sliderBrillo;
     private javax.swing.JPanel tablaColores;
     private javax.swing.JSpinner tamGrosor;
     private javax.swing.JCheckBox transparencia;
