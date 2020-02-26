@@ -1,2 +1,0 @@
-practica8_LienzoImagen2D.practica8$1
-practica8_LienzoImagen2D.practica8
